@@ -1,40 +1,45 @@
-let playerScore = 0;
-let computerScore = 0;
-
+// Utils
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   const randomNum = Math.floor(Math.random() * 3);
   return choices[randomNum];
 }
 
-function getPlayerChoice() {
-  const input = prompt("Rock, paper, scissors?").toLowerCase();
-  switch (input) {
-    case "rock":
-      return input;
-    case "paper":
-      return input;
-    case "scissors":
-      return input;
-    default:
-      alert("WRONG INPUT");
-  }
-}
+// Round variable
+let round = 1;
 
+// Score variables
+let playerScore = 0;
+let computerScore = 0;
+
+// Where player and computer choices are stored
+let playerChoice = "";
+
+// Utils too
 function winAlert(player, computer) {
-  console.log(`You win! ${player} beats ${computer}`);
+  document.querySelector(
+    ".console-message-display"
+  ).textContent = `You win! ${player} beats ${computer}`;
 }
 function loseAlert(player, computer) {
-  console.log(`You lose! ${computer} beats ${player}`);
+  document.querySelector(
+    ".console-message-display"
+  ).textContent = `You lose! ${computer} beats ${player}`;
+}
+function tieAlert() {
+  document.querySelector(".console-message-display").textContent = `TIE`;
+}
+function clearChoice() {
+  playerChoice = "";
 }
 
 // Compare computers choice vs players choice
-function winner(getComputerChoice, getPlayerChoice) {
-  const computerChoice = getComputerChoice();
-  const playerChoice = getPlayerChoice();
+function winner(playerChoice, getComputerChoice) {
+  let computerChoice = getComputerChoice();
   if (computerChoice === playerChoice) {
     playerScore + 0;
     computerScore + 0;
+    tieAlert();
   } else if (playerChoice == "rock") {
     if (computerChoice == "paper") {
       winAlert(playerChoice, computerChoice);
@@ -60,7 +65,40 @@ function winner(getComputerChoice, getPlayerChoice) {
       computerScore++;
     }
   }
-  console.log(`Player score: ${playerScore} Computer score: ${computerScore}`);
 }
 
-Array.from({ length: 5 }, () => winner(getComputerChoice, getPlayerChoice));
+// DOM
+function displayHandler() {
+  document.querySelector(
+    ".player-counter-display"
+  ).textContent = `Player: ${playerScore}`;
+
+  document.querySelector(
+    ".comp-counter-display"
+  ).textContent = `Computer: ${computerScore}`;
+
+  document.querySelector(".round-display").textContent = `Round ${round}`;
+}
+
+function clickHandler(val) {
+  document.querySelector(`#${val}`).addEventListener("click", function (e) {
+    e.preventDefault();
+    playerChoice = val;
+    winner(playerChoice, getComputerChoice);
+    round++;
+    clearChoice();
+    displayHandler();
+  });
+  if (round >= 5) {
+    console.log("SEGGS");
+    round = 1;
+    playerScore = 0;
+    computerScore = 0;
+  }
+}
+
+clickHandler("rock");
+clickHandler("paper");
+clickHandler("scissors");
+
+// Array.from({ length: 5 }, () => winner(playerChoice, playerChoice));

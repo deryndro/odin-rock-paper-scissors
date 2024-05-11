@@ -2,16 +2,27 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style.css" />
-    <script src="scripts.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
+    <div class="score-counter-container">
+      <h3 class="round-display">Round 1</h3>
+      <div class="player-comp-score-container">
+        <div class="player-counter-display">Player: 0</div>
+        <div class="comp-counter-display">Computer: 0</div>
+      </div>
+    </div>
+    <div class="console-message-container">
+      <h3 class="console-message-title">Console message</h3>
+      <div class="console-message-display"></div>
+    </div>
     <div class="button-container">
       <button id="rock">Rock</button>
       <button id="paper">Paper</button>
       <button id="scissors">Scissors</button>
     </div>
+    <script src="scripts.js"></script>
   </body>
 </html>
