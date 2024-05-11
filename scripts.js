@@ -90,7 +90,6 @@ function clickHandler(val) {
     displayHandler();
   });
   if (round >= 5) {
-    console.log("SEGGS");
     round = 1;
     playerScore = 0;
     computerScore = 0;
