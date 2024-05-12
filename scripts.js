@@ -33,6 +33,22 @@ function clearChoice() {
   playerChoice = "";
 }
 
+// Clear score and round
+function clearScore() {
+  if (playerScore >= 5) {
+    document.querySelector(".round-display").textContent = "Player Won!";
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+  }
+  if (computerScore >= 5) {
+    document.querySelector(".round-display").textContent = "Computer Won!";
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+  }
+}
+
 // Compare computers choice vs players choice
 function winner(playerChoice, getComputerChoice) {
   let computerChoice = getComputerChoice();
@@ -88,12 +104,8 @@ function clickHandler(val) {
     round++;
     clearChoice();
     displayHandler();
+    clearScore();
   });
-  if (round >= 5) {
-    round = 1;
-    playerScore = 0;
-    computerScore = 0;
-  }
 }
 
 clickHandler("rock");
